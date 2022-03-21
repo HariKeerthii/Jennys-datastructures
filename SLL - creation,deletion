@@ -1,0 +1,59 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node *next;
+};
+struct node *head;
+void insert (int newdata)
+{
+    struct node *newnode = (struct node*)malloc(sizeof(struct node));
+    newnode->data= newdata;
+    newnode->next=head;
+    head = newnode;
+}
+
+void insert_at_pos(int pos,int newdata)
+{
+    struct node *newnode = (struct node*)malloc(sizeof(struct node));
+    int i;
+    newnode->data= newdata;
+    newnode->next = NULL;
+    struct node *temp = head;
+
+    while( i<pos-1)
+    {
+        temp=temp->next;
+        i++;
+    }
+    newnode->next = temp->next;
+    temp->next = newnode;
+}
+void display()
+{
+    struct node *temp = head;
+    while(temp != NULL)
+    {
+        printf("%d",temp->data);
+        temp = temp->next;
+    }
+}
+void delete()
+{
+    struct node *temp = head;
+    head = head->next;
+   // head = temp;
+    free(temp);
+}
+int main()
+{
+    insert(5);
+    insert(6);
+    insert(7);
+    insert_at_pos(2,3);
+    display();
+    delete();
+    printf("\n");
+    display();
+}
