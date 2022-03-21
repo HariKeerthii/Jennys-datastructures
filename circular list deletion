@@ -1,0 +1,73 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node *next;
+};
+
+struct node *tail;
+
+void insert(int newdata)
+{
+    struct node *newnode = (struct node*)malloc(sizeof(struct node));
+    newnode->data = newdata;
+    if(tail == NULL)
+    {
+        tail = newnode;
+        tail->next = newnode;
+    }
+    else
+    {
+    newnode->next = tail->next;
+    tail->next = newnode;
+    tail = newnode;
+    }
+}
+
+void insert_at_pos(int newdata, int pos)
+{
+      struct node *newnode = (struct node*)malloc(sizeof(struct node));
+    newnode->data = newdata;
+    struct node *temp = tail;
+    int i;
+    while(i<pos-1)
+    {
+        temp = temp->next;
+        
+        i++;
+    }
+    newnode->next = temp->next;
+    temp->next = newnode;
+}
+void delete()
+{
+   struct node *temp = tail;
+   temp = tail->next;
+   tail->next = tail->next->next;
+   free(temp);
+   
+   //this is just raw code. to delete at the front as well as in the end. but to delete at a given pos, need to write
+}
+void display()
+{
+    struct node *temp=tail;
+    do{
+        printf("%d ",temp->data);
+        temp = temp->next;
+    }while(temp!=tail);
+}
+
+int main()
+{
+    insert(5);
+    insert(6);
+    insert(7);
+    insert_at_pos(10,2);
+    delete();
+    delete();
+    delete();
+    display();
+    return 0;
+}
+
